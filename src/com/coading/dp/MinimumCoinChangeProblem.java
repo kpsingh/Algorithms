@@ -9,17 +9,18 @@ import java.util.Arrays;
 public class MinimumCoinChangeProblem {
 
 	public static void main(String[] args) {
-		int[] d = { 1,3,5,7};
+		int[] d = { 1, 3, 5, 7 };
 		int sum = 12;
 
-		int minCoin = dpMinCoinChnage(sum,d);
+		int minCoin = dpMinCoinChnage(sum, d);
 
 		System.out.println(minCoin);
 
 	}
-/*
- * Naive approach
- */
+
+	/*
+	 * Naive approach
+	 */
 	public static int minCoin(int coins[], int V) {
 		if (V == 0)
 			return 0;
@@ -39,34 +40,32 @@ public class MinimumCoinChangeProblem {
 
 		return result;
 	}
-	
-	
+
 	/*
-	 * Dynamic Programming Approach. Assume that denomination array is sorted in asencding order.
+	 * Dynamic Programming Approach. Assume that denomination array is sorted in
+	 * ascending order.
 	 */
-	
-	public static int dpMinCoinChnage(int sum, int[]d)
-	{
-		int a[] = new int[sum+1];
-		Arrays.fill(a, Integer.MAX_VALUE);
-		a[0]=0;
+
+	public static int dpMinCoinChnage(int sum, int[] d) {
 		
-		for(int i = 1; i<= sum; i++)
+		int a[] = new int[sum + 1];
+		Arrays.fill(a, Integer.MAX_VALUE);
+		a[0] = 0;
+
+		for (int i = 1; i <= sum; i++) // Iterate through each element of sum
+										// array.
 		{
-			for(int j = d.length-1; j >=0; j--)
+			for (int j = d.length - 1; j >= 0; j--) // check which element is <=
+													// current index.
 			{
-				if(d[j]<= i)
-				{
-					a[i] = Math.min(1+ a[i-d[j]], a[i]);
+				if (d[j] <= i) {
+					a[i] = Math.min(1 + a[i - d[j]], a[i]);
 				}
 			}
 		}
-		
+
 		return a[sum];
-		
-		
+
 	}
-	
-	
 
 }
